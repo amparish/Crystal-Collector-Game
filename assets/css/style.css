@@ -1,0 +1,12 @@
+body {
+	background-image: url("../images/swirl_pattern.png");
+}
+
+.panel {
+	background-color: white;
+	border: 2px solid black;
+}
+
+#random-number, #win-lose {
+	text-align: center;
+}
