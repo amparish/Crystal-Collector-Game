@@ -1,15 +1,10 @@
 /*
 	generate random number between 19 - 120 on load
-	
 	player clicks on a crystal, crystal adds (1 - 12, randomized) points to score
-	
 	update score counter
-	
-	if score = random number, wins++
-	
+	if score = random number, Win++
 	if score > random number, lose++
-	
-	if wins++ or lose++:
+	if win++ or lose++:
 		generate new random number
 		reset score to 0
 		randomize crystal score values
@@ -26,53 +21,60 @@ var currentScore = 0;
 
 $("#target-number").html("<h2>Target Score: " + targetNumber + "</h2>");
 $("#score").html("<h2>Current Score: " + currentScore + "</h2>");
+$("#win").html("<h2>Win: " + win + "</h2>");
+$("#lose").html("<h2>Lose: " + lose + "</h2>");
 $("#red").attr("data-crystalvalue", redCrystal);
 $("#blue").attr("data-crystalvalue", blueCrystal);
 $("#green").attr("data-crystalvalue", greenCrystal);
 $("#white").attr("data-crystalvalue", whiteCrystal);
 
-$("#red").on("click", function(){
-    var crystalValue = ($(this).attr("data-crystalvalue"));
-    crystalValue = parseInt(crystalValue);
-    currentScore += crystalValue;
-	$("#score").html("<h2>Current Score: " + currentScore + "</h2>");
-    console.log(currentScore);
-});
-
-$("#blue").on("click", function(){
+function click(){
     var crystalValue = ($(this).attr("data-crystalvalue"));
     crystalValue = parseInt(crystalValue);
     currentScore += crystalValue;
     $("#score").html("<h2>Current Score: " + currentScore + "</h2>");
     console.log(currentScore);
-});
 
-$("#green").on("click", function(){
-    var crystalValue = ($(this).attr("data-crystalvalue"));
-    crystalValue = parseInt(crystalValue);
-    currentScore += crystalValue;
-    $("#score").html("<h2>Current Score: " + currentScore + "</h2>");
-    console.log(currentScore);
-});
+    if (currentScore == targetNumber) {
+		win++;
+		$("#win").html("<h2>Win: " + win + "</h2>");
+		currentScore = 0;
+		$("#score").html("<h2>Current Score: " + currentScore + "</h2>");
 
-$("#white").on("click", function(){
-    var crystalValue = ($(this).attr("data-crystalvalue"));
-    crystalValue = parseInt(crystalValue);
-    currentScore += crystalValue;
-    $("#score").html("<h2>Current Score: " + currentScore + "</h2>");
-    console.log(currentScore);
-});
+		targetNumber = [Math.floor(Math.random()*101)+19];
+		$("#target-number").html("<h2>Target Score: " + targetNumber + "</h2>");
+		redCrystal = [Math.floor(Math.random()*12)+1];
+		$("#red").attr("data-crystalvalue", redCrystal);
+		blueCrystal = [Math.floor(Math.random()*12)+1];
+		$("#blue").attr("data-crystalvalue", blueCrystal);
+		greenCrystal = [Math.floor(Math.random()*12)+1];
+		$("#green").attr("data-crystalvalue", greenCrystal);
+		whiteCrystal = [Math.floor(Math.random()*12)+1];
+		$("#white").attr("data-crystalvalue", whiteCrystal);
+	}
 
-if (currentScore === targetNumber) {
-	win++;
-	$("#win-lose").html("<p>Wins: " + win + " Losses: " + lose + "</p>");
-	currentScore = 0;
-	$("#score").html("<h2>Current Score: " + currentScore + "</h2>");
+	else if (currentScore > targetNumber) {
+		lose++;
+		$("#lose").html("<h2>Lose: " + lose + "</h2>");
+		currentScore = 0;
+		$("#score").html("<h2>Current Score: " + currentScore + "</h2>");
+
+		targetNumber = [Math.floor(Math.random()*101)+19];
+		$("#target-number").html("<h2>Target Score: " + targetNumber + "</h2>");
+		redCrystal = [Math.floor(Math.random()*12)+1];
+		$("#red").attr("data-crystalvalue", redCrystal);
+		blueCrystal = [Math.floor(Math.random()*12)+1];
+		$("#blue").attr("data-crystalvalue", blueCrystal);
+		greenCrystal = [Math.floor(Math.random()*12)+1];
+		$("#green").attr("data-crystalvalue", greenCrystal);
+		whiteCrystal = [Math.floor(Math.random()*12)+1];
+		$("#white").attr("data-crystalvalue", whiteCrystal);
+	};
 }
 
-else if (currentScore > targetNumber) {
-	lose++;
-	$("#win-lose").html("<p>Wins: " + win + " Losses: " + lose + "</p>");
-	currentScore = 0;
-	$("#score").html("<h2>Current Score: " + currentScore + "</h2>");
-};
+$("#red").on("click", click);
+$("#blue").on("click", click);
+$("#green").on("click", click);
+$("#white").on("click", click);
+
+
