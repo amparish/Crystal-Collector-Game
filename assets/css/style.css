@@ -7,6 +7,10 @@ body {
 	border: 2px solid black;
 }
 
-#random-number, #win-lose {
+#random-number, #win-lose, h2 {
+	text-align: center;
+}
+
+.page-header {
 	text-align: center;
 }
